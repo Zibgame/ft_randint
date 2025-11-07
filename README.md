@@ -11,10 +11,10 @@ le **XOR** et le **nombre d’or** 💫
 
 La fonction utilise une variable `static unsigned long seed`, qui garde sa valeur  
 entre les appels.  
-À chaque appel, elle mélange plusieurs adresses mémoire (celles d’une variable locale,  
-du paramètre et de la fonction elle-même) pour créer une base un peu aléatoire.  
-Ensuite, elle ajoute une constante liée au **nombre d’or** en hexadécimal  
-(`0x9e3779b97f4a7c15`) pour décaler la valeur du seed à chaque aqppel.
+À chaque appel, elle melange plusieurs adresses memoire (celles d’une variable locale,  
+du parametre et de la fonction elle-meme) pour creer une base un peu aleatoire.  
+Ensuite, elle ajoute une constante liee au **nombre d’or** en hexadecimal  
+(`0x9e3779b97f4a7c15`) pour decaler la valeur du seed à chaque aqppel.
 
 ```c
 
