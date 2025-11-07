@@ -1,22 +1,34 @@
 # 🎲 ft_randint
 
-Petit projet perso en C qui génère des nombres pseudo-aléatoires **sans utiliser `<stdlib.h>`**.  
-Pas de `rand()`, pas de `srand()`, juste un peu de logique, des adresses mémoire, et le nombre d’or 💫
+Petit projet perso en C pour générer des **nombres pseudo-aléatoires**,  
+sans utiliser la fonction `rand()` de la librairie standard.  
+L’idée, c’est de créer un comportement imprévisible basé sur la **mémoire**,  
+le **XOR** et le **nombre d’or** 💫
 
 ---
 
-## ⚙️ Fonctionnement
+## ⚙️ Principe
 
-`ft_randint` utilise :
-- les **adresses mémoire** de variables locales et de la fonction elle-même 🧠  
-- une **constante du nombre d’or** (`0x9e3779b97f4a7c15UL`)  
-- et un **seed statique** mis à jour à chaque appel ⚡  
-
-Le tout permet de produire un résultat assez imprévisible, sans aucune dépendance.
+La fonction utilise une variable `static unsigned long seed`, qui garde sa valeur  
+entre les appels.  
+À chaque appel, elle mélange plusieurs adresses mémoire (celles d’une variable locale,  
+du paramètre et de la fonction elle-même) pour créer une base un peu aléatoire.  
+Ensuite, elle ajoute une constante liée au **nombre d’or** en hexadécimal  
+(`0x9e3779b97f4a7c15`) pour décaler la valeur du seed à chaque aqppel.
 
 ```c
-mix = (unsigned long)&local
-    ^ (unsigned long)&max
-    ^ (unsigned long)&ft_randint;
-seed += mix + 0x9e3779b97f4a7c15UL;
-return (seed % (unsigned long)max);
+
+int	ft_randint(int max)
+{
+	static unsigned long	seed;
+	int						local;
+	unsigned long			mix;
+
+	if (max <= 0)
+		max = 1;
+	mix = (unsigned long)&local
+		^ (unsigned long)&max
+		^ (unsigned long)&ft_randint;
+	seed += mix + 0x9e3779b97f4a7c15U;
+	return (seed % (unsigned long)max);
+}
