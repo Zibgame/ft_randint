@@ -29,6 +29,6 @@ int	ft_randint(int max)
 	mix = (unsigned long)&local
 		^ (unsigned long)&max
 		^ (unsigned long)&ft_randint;
-	seed += mix + 0x9e3779b97f4a7c15U;
+	seed += mix + 0x9e3779b97f4a7c15;
 	return (seed % (unsigned long)max);
 }
